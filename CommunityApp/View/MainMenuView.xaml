@@ -15,10 +15,12 @@
          VerticalAlignment="Top" Width="226" Height="30"/>
         <Button x:Name="btnEventsAndAnnouncements" 
          Content="Local Events and Announcements" 
+         IsEnabled="False"
          HorizontalAlignment="Center" 
          Margin="0,171,0,0" 
          VerticalAlignment="Top" Height="30" Width="228"/>
         <Button x:Name="btnServiceRequestStatus" 
+         IsEnabled="False"
          Content="Service Request Status"
          HorizontalAlignment="Center"
          VerticalAlignment="Top" Width="226" Height="30" Margin="0,225,0,0"/>
