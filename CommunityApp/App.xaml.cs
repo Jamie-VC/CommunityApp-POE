@@ -22,7 +22,8 @@ namespace CommunityApp
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            _navigationStore.CurrentViewModel = CreateIssueViewModel();
+            //_navigationStore.CurrentViewModel = CreateIssueViewModel();
+            _navigationStore.CurrentViewModel = CreateMainMenuViewModel();
 
             MainWindow = new MainWindow()
             {
@@ -41,6 +42,11 @@ namespace CommunityApp
         private IssueListViewModel CreateIssueViewModel()
         {
             return new IssueListViewModel(_user, new NavigationService(_navigationStore, CreateReportIssueViewModel));
+        }
+
+        private MainMenuViewModel CreateMainMenuViewModel()
+        {
+            return new MainMenuViewModel(_user, new NavigationService(_navigationStore, CreateIssueViewModel));
         }
     }
 

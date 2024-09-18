@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace CommunityApp.View
 {
     /// <summary>
-    /// Interaction logic for MenuView.xaml
+    /// Interaction logic for MainMenuView.xaml
     /// </summary>
-    public partial class MenuView : UserControl
+    public partial class MainMenuView : UserControl
     {
-        public MenuView()
+        public MainMenuView()
         {
             InitializeComponent();
-        }
-
-        private void btnEventsAndAnnouncements_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Coming Soon!");
-        }
-
-        private void btnServiceRequestStatus_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Coming Soon!");
         }
     }
 }
