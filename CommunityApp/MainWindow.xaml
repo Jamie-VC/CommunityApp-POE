@@ -10,11 +10,14 @@
         Title="CommunityApp" Height="450" Width="800">
     <Grid>
         <Grid.Resources>
-            <DataTemplate DataType="{x:Type vms:ReportIssueViewModel}">
+            <DataTemplate DataType="{x:Type vms:ReportIssueViewModel}"> 
                 <view:ReportIssueView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type vms:IssueListViewModel}">
                 <view:IssueListView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:MainMenuViewModel}">
+                <view:MainMenuView/>
             </DataTemplate>
         </Grid.Resources>
 
