@@ -26,7 +26,8 @@ namespace CommunityApp.Command
             Issue issue = new Issue(
                 _reportIssueViewModel.Location, 
                 _reportIssueViewModel.Category, 
-                _reportIssueViewModel.Description);
+                _reportIssueViewModel.Description,
+                _reportIssueViewModel.MediaPath);
             
             _user.ReportIssue(issue);
 

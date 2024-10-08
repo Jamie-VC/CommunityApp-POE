@@ -14,7 +14,7 @@ namespace CommunityApp.ViewModel
         public string Location => _issue.Location;
         public string Category => _issue.Category;
         public string Description => _issue.Description;
-        //public string MediaAttachment => _issue.MediaAttachment;
+        public string MediaPath => _issue.MediaPath;
 
         public IssueViewModel(Issue issue)
         {

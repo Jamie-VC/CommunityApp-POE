@@ -9,6 +9,7 @@ using CommunityApp.Model;
 using CommunityApp.Stores;
 using CommunityApp.Services;
 using System.Collections.ObjectModel;
+using Microsoft.Win32;
 
 namespace CommunityApp.ViewModel
 {
@@ -17,7 +18,7 @@ namespace CommunityApp.ViewModel
         private string _location;
         private string _category;
         private string _description;
-        //private string _mediaAttachment;
+        private string _mediaPath;
         //private List<Issue> _issueList;
 
         public ObservableCollection<string> Categories { get; }
@@ -49,6 +50,16 @@ namespace CommunityApp.ViewModel
                 OnPropertyChanged(nameof(Description));
             }
         }
+        public string MediaPath
+        {
+            get => _mediaPath;
+            set
+            {
+                _mediaPath = value;
+                OnPropertyChanged(nameof(MediaPath));
+            }
+        }
+        public ICommand AttachMediaCommand { get; }
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
 
@@ -61,8 +72,18 @@ namespace CommunityApp.ViewModel
                 "Utilities"
             };
 
+            AttachMediaCommand = new AttachMediaCommand(this);
             SubmitCommand = new ReportIssueCommand(this, user, issueViewNavigationService);
             CancelCommand = new NavigateCommand(issueViewNavigationService);
+        }
+        public void AttachMedia()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                MediaPath = openFileDialog.FileName; // Store the selected file path
+            }
         }
     }
 }

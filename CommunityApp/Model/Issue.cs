@@ -11,14 +11,14 @@ namespace CommunityApp.Model
         public string Location { get; set; }
         public string Category { get; set; }
         public string Description { get; set; }
-        //public string MediaAttachment { get; set; }
+        public string? MediaPath { get; set; }
 
-        public Issue(string location, string category, string description) //string mediaAttachment
+        public Issue(string location, string category, string description, string mediaPath)
         {
             Location = location;
             Category = category;
             Description = description;
-            //MediaAttachment = mediaAttachment;
+            MediaPath = mediaPath;
         }
     }
 }

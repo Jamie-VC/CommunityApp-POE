@@ -6,56 +6,96 @@
              xmlns:local="clr-namespace:CommunityApp.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <UserControl.Resources>
+        <!-- Merge the ButtonStyles Resource Dictionary -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Update the path based on your project structure -->
+                <ResourceDictionary Source="../Resources/ButtonStyle.xaml"/>
+                <!-- Adjust this path accordingly -->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid Background="#F7F7F7">
+        <!-- Light background for the whole UserControl -->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Background="#FFFFFF" Margin="10" Padding="10" 
+                BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock
-                Grid.Column="0"
-                FontSize="24"
-                Text="View Issues"/>
-            <Button
-                Grid.Column="1"
-                 Margin="10 0 0 0"
-                Content="Report an issue"
-                 Command="{Binding ReportIssueCommand}"/>
-        </Grid>
+                <TextBlock
+                    Grid.Column="0"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Text="View Issues"
+                    VerticalAlignment="Center"
+                    Margin="0,0,10,0" />
 
-        <ListView Grid.Row="1" Margin="0 25 0 0" ItemsSource="{Binding Issues}">
+                <Button
+                    Grid.Column="1"
+                    Margin="10 0 0 0"
+                    Content="Report an issue"
+                    Command="{Binding ReportIssueCommand}"
+                    Style="{StaticResource RoundedButtonStyle}"
+                    Background="#007ACC"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Padding="8,4"
+                    BorderBrush="Transparent"
+                    BorderThickness="0"
+                    Cursor="Hand">
+                </Button>
+            </Grid>
+        </Border>
+
+        <ListView Grid.Row="1" 
+                  Margin="10" 
+                  ItemsSource="{Binding Issues}" 
+                  BorderThickness="1" BorderBrush="#CCCCCC" 
+                  Background="#FFFFFF">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Location">
+                    <GridViewColumn Header="Location" Width="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Location}"/>
+                                <TextBlock Text="{Binding Location}" FontSize="14" Margin="5" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Category">
+                    <GridViewColumn Header="Category" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Category}"/>
+                                <TextBlock Text="{Binding Category}" FontSize="14" Margin="5" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Description">
+                    <GridViewColumn Header="Description" Width="250">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Description}"/>
+                                <TextBlock Text="{Binding Description}" FontSize="14" Margin="5" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
+                    <GridViewColumn Header="Image" Width="70">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="50" Height="50" 
+                                       Margin="5" Stretch="Uniform" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
