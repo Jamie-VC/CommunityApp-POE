@@ -19,10 +19,8 @@
      Margin="53,117,0,0"
      VerticalAlignment="Top"
      SelectedItem="{Binding Category, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Categories}"
      Width="194" Height="26">
-            <ComboBoxItem Content="Sanitation"/>
-            <ComboBoxItem Content="Roads"/>
-            <ComboBoxItem Content="Utilities"/>
         </ComboBox>
         <TextBox x:Name="txtDescription" 
     HorizontalAlignment="Left"

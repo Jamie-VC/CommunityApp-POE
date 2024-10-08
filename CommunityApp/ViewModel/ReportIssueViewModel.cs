@@ -8,6 +8,7 @@ using CommunityApp.Command;
 using CommunityApp.Model;
 using CommunityApp.Stores;
 using CommunityApp.Services;
+using System.Collections.ObjectModel;
 
 namespace CommunityApp.ViewModel
 {
@@ -18,6 +19,8 @@ namespace CommunityApp.ViewModel
         private string _description;
         //private string _mediaAttachment;
         //private List<Issue> _issueList;
+
+        public ObservableCollection<string> Categories { get; }
 
         public string Location
         {
@@ -51,6 +54,13 @@ namespace CommunityApp.ViewModel
 
         public ReportIssueViewModel(User user, NavigationService issueViewNavigationService)
         {
+            Categories = new ObservableCollection<string>
+            {
+                "Sanitation",
+                "Roads",
+                "Utilities"
+            };
+
             SubmitCommand = new ReportIssueCommand(this, user, issueViewNavigationService);
             CancelCommand = new NavigateCommand(issueViewNavigationService);
         }
