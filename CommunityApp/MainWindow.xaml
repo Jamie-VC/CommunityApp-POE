@@ -19,6 +19,9 @@
             <DataTemplate DataType="{x:Type vms:MainMenuViewModel}">
                 <view:MainMenuView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:LocalEventsViewModel}">
+                <view:LocalEventsView/>
+            </DataTemplate>
         </Grid.Resources>
 
         <ContentControl Content="{Binding CurrentViewModel}"/>

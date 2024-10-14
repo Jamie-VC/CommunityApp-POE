@@ -27,8 +27,9 @@
          VerticalAlignment="Top" Width="226" Height="30"/>
         <Button x:Name="btnEventsAndAnnouncements" 
          Style="{StaticResource RoundedButtonStyle}"
+         Command="{Binding LocalEventsCommand}"
          Content="Local Events and Announcements" 
-         IsEnabled="False"
+         IsEnabled="True"
          HorizontalAlignment="Center" 
          Margin="0,171,0,0" 
          VerticalAlignment="Top" Height="30" Width="228"/>
