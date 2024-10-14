@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CommunityApp.Services;
 using CommunityApp.Command;
+using CommunityApp.Stores;
 
 namespace CommunityApp.ViewModel
 {
@@ -14,10 +15,10 @@ namespace CommunityApp.ViewModel
     {
         private readonly User _user;
         public ICommand ReportCommand { get; }
-        public MainMenuViewModel(User user, NavigationService reportIssueNavigationService)
+        public MainMenuViewModel(User user, NavigationStore navigationStore)
         {
             _user = user;
-            ReportCommand = new NavigateCommand(reportIssueNavigationService);
+            ReportCommand = new NavigateIssueListCommand(_user, navigationStore);
         }
     }
 }

@@ -18,12 +18,14 @@ namespace CommunityApp.ViewModel
         private readonly ObservableCollection<IssueViewModel> _issues;
         public IEnumerable<IssueViewModel> Issues => _issues;
        public ICommand ReportIssueCommand { get; }
+        public ICommand BackCommand { get; }
 
-        public IssueListViewModel(User user, NavigationService reportIssueNavigationService)
+        public IssueListViewModel(User user, NavigationStore navigationStore)
         {
             _user = user;
             _issues = new ObservableCollection<IssueViewModel>();
-            ReportIssueCommand = new NavigateCommand(reportIssueNavigationService);
+            ReportIssueCommand = new NavigateReportIssueCommand(user, navigationStore);
+            BackCommand = new NavigateMenuCommand(user, navigationStore);
 
             UpdateIssues();
         }

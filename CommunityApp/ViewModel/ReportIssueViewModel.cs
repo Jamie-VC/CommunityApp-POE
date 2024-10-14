@@ -63,7 +63,7 @@ namespace CommunityApp.ViewModel
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public ReportIssueViewModel(User user, NavigationService issueViewNavigationService)
+        public ReportIssueViewModel(User user, NavigationStore navigationStore)
         {
             Categories = new ObservableCollection<string>
             {
@@ -73,8 +73,8 @@ namespace CommunityApp.ViewModel
             };
 
             AttachMediaCommand = new AttachMediaCommand(this);
-            SubmitCommand = new ReportIssueCommand(this, user, issueViewNavigationService);
-            CancelCommand = new NavigateCommand(issueViewNavigationService);
+            SubmitCommand = new ReportIssueCommand(this, user, navigationStore);
+            CancelCommand = new NavigateIssueListCommand(user, navigationStore);
         }
         public void AttachMedia()
         {
