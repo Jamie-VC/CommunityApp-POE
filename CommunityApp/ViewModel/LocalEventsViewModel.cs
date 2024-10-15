@@ -48,10 +48,21 @@ namespace CommunityApp.ViewModel
                 OnPropertyChanged(nameof(SelectedDate));
             }
         }
+        private string _searchItem;
+        public string SearchItem
+        {
+            get => _searchItem;
+            set
+            {
+                _searchItem = value;
+                OnPropertyChanged(nameof(SearchItem));
+            }
+        }
 
         //Commands
         public ICommand BackCommand { get; }
         public ICommand SearchCommand { get; }
+        public ICommand SearchItemCommand { get; }
 
         public LocalEventsViewModel(User user, NavigationStore navigationStore)
         {
@@ -69,6 +80,7 @@ namespace CommunityApp.ViewModel
 
             BackCommand = new NavigateMenuCommand(user, navigationStore);
             SearchCommand =new SearchEventsCommand(this, user, navigationStore, _eventsQueue, Events);
+            SearchItemCommand = new SearchItemCommand(this, navigationStore, _eventsQueue, Recommended);
 
             LoadSampleData();
         }

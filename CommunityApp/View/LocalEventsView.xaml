@@ -23,7 +23,7 @@
 
         <TextBlock x:Name="textBlock" 
                    HorizontalAlignment="Left" 
-                   Margin="29,25,0,0" 
+                   Margin="17,17,0,0" 
                    TextWrapping="Wrap"
                    Text="Local Events and Announcements" 
                    Foreground="White"
@@ -32,7 +32,7 @@
                    VerticalAlignment="Top"/>
         <TextBlock x:Name="textBox" 
                  HorizontalAlignment="Left"
-                 Margin="29,83,0,0" 
+                 Margin="29,92,0,0" 
                  TextWrapping="Wrap" 
                  Text="Category" 
                    Foreground="White"
@@ -117,7 +117,7 @@
                   ItemsSource="{Binding Categories}"
                   SelectedItem="{Binding SelectedCategory}"
                   HorizontalAlignment="Left" 
-                  Margin="146,86,0,0"
+                  Margin="146,95,0,0"
                   VerticalAlignment="Top" Width="120"/>
         <TextBlock x:Name="textBox_Copy" 
             HorizontalAlignment="Left"
@@ -130,7 +130,7 @@
             Width="117"/>
         <TextBox x:Name="textBox1" 
                  HorizontalAlignment="Left"
-                 Margin="146,125,0,0"
+                 Margin="146,134,0,0"
                  TextWrapping="Wrap" 
                  Text="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}" 
                  VerticalAlignment="Top" Width="120"/>
@@ -153,5 +153,19 @@
             FontSize="18"
             VerticalAlignment="Top"
             Width="135"/>
+        <TextBox x:Name="txtSearchItem" 
+            HorizontalAlignment="Left"
+            Margin="17,49,0,0"
+            TextWrapping="Wrap" 
+            Text="{Binding SearchItem, UpdateSourceTrigger=PropertyChanged}" 
+            VerticalAlignment="Top" Width="158" Height="23"/>
+        <Button x:Name="btnSearch_Copy"
+            Command="{Binding SearchItemCommand}"
+            Content="Search"
+            FontSize="18"
+            Style="{StaticResource RoundedButtonStyle}"
+            HorizontalAlignment="Left"
+            Margin="180,49,0,0" 
+            VerticalAlignment="Top" Width="154" Height="23"/>
     </Grid>
 </UserControl>

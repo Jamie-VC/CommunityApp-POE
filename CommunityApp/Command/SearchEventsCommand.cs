@@ -65,13 +65,13 @@ namespace CommunityApp.Command
                 }
             }
 
-            foreach(var e in _events)
-            {
-                if(_user.Interests.Contains(e.Category))
-                {
-                    _localEventsViewModel.Recommended.Add(e);
-                }
-            }
+            //foreach(var e in _events)
+            //{
+            //    if(_user.Interests.Contains(e.Category))
+            //    {
+            //        _localEventsViewModel.Recommended.Add(e);
+            //    }
+            //}
         }
     }
 }
