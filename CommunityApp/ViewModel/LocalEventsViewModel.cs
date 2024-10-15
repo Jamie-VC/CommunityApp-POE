@@ -80,7 +80,7 @@ namespace CommunityApp.ViewModel
 
             BackCommand = new NavigateMenuCommand(user, navigationStore);
             SearchCommand =new SearchEventsCommand(this, user, navigationStore, _eventsQueue, Events);
-            SearchItemCommand = new SearchItemCommand(this, navigationStore, _eventsQueue, Recommended);
+            SearchItemCommand = new SearchItemCommand(this, navigationStore, _eventsQueue, Recommended, _user);
 
             LoadSampleData();
         }
