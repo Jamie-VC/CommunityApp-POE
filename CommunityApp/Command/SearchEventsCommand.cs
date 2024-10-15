@@ -28,7 +28,7 @@ namespace CommunityApp.Command
         public override void Execute(object? parameter)
         {
            _localEventsViewModel.Events.Clear();
-            //localEventsViewModel.LoadSampleData();
+
             if (_localEventsViewModel.SelectedCategory ==null && _localEventsViewModel.SelectedDate == null || _localEventsViewModel.SelectedDate == "")
             {
                 foreach (var e in _events)
@@ -64,14 +64,6 @@ namespace CommunityApp.Command
                     _localEventsViewModel.Events.Add(e);
                 }
             }
-
-            //foreach(var e in _events)
-            //{
-            //    if(_user.Interests.Contains(e.Category))
-            //    {
-            //        _localEventsViewModel.Recommended.Add(e);
-            //    }
-            //}
         }
     }
 }
