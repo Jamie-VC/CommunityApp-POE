@@ -8,12 +8,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <!-- Merge the ButtonStyles Resource Dictionary -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- Update the path based on your project structure -->
                 <ResourceDictionary Source="../Resources/ButtonStyle.xaml"/>
-                <!-- Adjust this path accordingly -->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>

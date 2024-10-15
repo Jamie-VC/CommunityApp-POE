@@ -82,7 +82,7 @@ namespace CommunityApp.ViewModel
             openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
-                MediaPath = openFileDialog.FileName; // Store the selected file path
+                MediaPath = openFileDialog.FileName;
             }
         }
     }

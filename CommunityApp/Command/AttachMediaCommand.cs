@@ -17,7 +17,7 @@ namespace CommunityApp.Command
             _ReportIssueViewModel = viewModel;
         }
 
-        public bool CanExecute(object parameter) => true; // You can implement logic to enable/disable the command
+        public bool CanExecute(object parameter) => true;
 
         public void Execute(object parameter)
         {
