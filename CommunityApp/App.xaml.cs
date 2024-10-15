@@ -15,9 +15,13 @@ namespace CommunityApp
     {
         private readonly User _user;
         private readonly NavigationStore _navigationStore;
+
+        HashSet<string> _interests = new HashSet<string>();
         public App()
         {
-            _user = new User("User");
+            _interests.Add("Music");
+            _interests.Add("Sport");
+            _user = new User("User", _interests);
             _navigationStore = new NavigationStore();
         }
         protected override void OnStartup(StartupEventArgs e)

@@ -8,6 +8,7 @@ using CommunityApp.Model;
 using CommunityApp.Stores;
 using CommunityApp.Command;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace CommunityApp.ViewModel
 {
@@ -16,9 +17,9 @@ namespace CommunityApp.ViewModel
         private readonly NavigationStore _navigationStore;
         private readonly User _user;
 
-        public ObservableCollection<Event> Events { get; set; }  //set the contents of this in the searchCommand
+        public ObservableCollection<Event> Events { get; set; } 
         public ObservableCollection<string> Categories { get; set; }
-        public ObservableCollection<DateOnly> Dates { get; set; }
+        public ObservableCollection<Event> Recommended { get; set; }
 
         //Data structures
         private Queue<Event> _eventsQueue;
@@ -59,6 +60,7 @@ namespace CommunityApp.ViewModel
 
             Events = new ObservableCollection<Event>();
             Categories = new ObservableCollection<string>();
+            Recommended = new ObservableCollection<Event>();
 
             _eventsQueue = new Queue<Event>();
             eventsByCategory = new SortedDictionary<string, List<Event>>();
@@ -66,7 +68,7 @@ namespace CommunityApp.ViewModel
             uniqueCategories = new HashSet<string>();
 
             BackCommand = new NavigateMenuCommand(user, navigationStore);
-            SearchCommand =new SearchEventsCommand(this, navigationStore, _eventsQueue, Events);
+            SearchCommand =new SearchEventsCommand(this, user, navigationStore, _eventsQueue, Events);
 
             LoadSampleData();
         }
