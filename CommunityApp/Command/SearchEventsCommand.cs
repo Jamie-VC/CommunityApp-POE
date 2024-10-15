@@ -26,10 +26,22 @@ namespace CommunityApp.Command
         public override void Execute(object? parameter)
         {
            _localEventsViewModel.Events.Clear();
-           
-            foreach(var e in _events)
+            //_localEventsViewModel.LoadSampleData();
+            if (_localEventsViewModel.SelectedCategory ==null)
             {
-                _localEventsViewModel.Events.Add(e);
+                foreach (var e in _events)
+                {
+                    _localEventsViewModel.Events.Add(e);
+                }
+            }
+            else
+            {
+                var filter = _events.Where(e => e.Category == _localEventsViewModel.SelectedCategory).ToList();
+
+                foreach (var e in filter)
+                {
+                    _localEventsViewModel.Events.Add(e);
+                }            
             }
         }
     }

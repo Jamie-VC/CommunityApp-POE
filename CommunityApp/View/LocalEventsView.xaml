@@ -15,14 +15,14 @@
                    FontSize="24"
                    FontStyle="Oblique"
                    VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox" 
+        <TextBlock x:Name="textBox" 
                  HorizontalAlignment="Left"
                  Margin="29,83,0,0" 
                  TextWrapping="Wrap" 
-                 Text="Search Category" 
+                 Text="Category" 
                  FontSize="18"
                  VerticalAlignment="Top"
-                 Width="239"/>
+                 Width="117"/>
         <ListView 
            Margin="29,135,10,128" 
            ItemsSource="{Binding Events}" 
@@ -70,5 +70,11 @@
                 HorizontalAlignment="Left"
                 Margin="29,340,0,0" 
                 VerticalAlignment="Top" Width="154"/>
+        <ComboBox x:Name="cmbCategory"
+                  ItemsSource="{Binding Categories}"
+                  SelectedItem="{Binding SelectedCategory}"
+                  HorizontalAlignment="Left" 
+                  Margin="146,86,0,0"
+                  VerticalAlignment="Top" Width="120"/>
     </Grid>
 </UserControl>

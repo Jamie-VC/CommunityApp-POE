@@ -18,10 +18,23 @@ namespace CommunityApp.ViewModel
 
         //Data structures
         public ObservableCollection<Event> Events { get; set; }  //set the contents of this in the searchCommand
+        public ObservableCollection<string> Categories { get; set; }
         private Queue<Event> _eventsQueue;
         private SortedDictionary<string, List<Event>> eventsByCategory;
         private SortedDictionary<DateOnly, List<Event>> eventsByDate;
         private HashSet<string> uniqueCategories;
+
+        //Gets users selected category for filtering
+        private string _selectedCategory;
+        public string SelectedCategory
+        {
+            get => _selectedCategory;
+            set
+            {
+                _selectedCategory = value;
+                OnPropertyChanged(nameof(SelectedCategory));
+            }
+        }
 
         //Commands
         public ICommand BackCommand { get; }
@@ -33,7 +46,10 @@ namespace CommunityApp.ViewModel
             _navigationStore = navigationStore;
 
             Events = new ObservableCollection<Event>();
+            Categories = new ObservableCollection<string>();
             _eventsQueue = new Queue<Event>();
+            eventsByCategory = new SortedDictionary<string, List<Event>>();
+            uniqueCategories = new HashSet<string>();
 
             BackCommand = new NavigateMenuCommand(user, navigationStore);
             SearchCommand =new SearchEventsCommand(this, navigationStore, _eventsQueue, Events);
@@ -58,14 +74,20 @@ namespace CommunityApp.ViewModel
             _eventsQueue.Enqueue(new Event("Chris Brown concert", "Music", new DateOnly(2025, 1, 23)));
 
             //Adds Categories to Dictionary
-            //foreach (var e in _eventsQueue)
-            //{
-            //    if (!eventsByCategory.ContainsKey(e.Category))
-            //    {
-            //        eventsByCategory[e.Category] = new List<Event>();
-            //    }
-            //    eventsByCategory[e.Category].Add(e);
-            //}
+            foreach (var e in _eventsQueue)
+            {
+                if (!eventsByCategory.ContainsKey(e.Category))
+                {
+                    eventsByCategory[e.Category] = new List<Event>();
+                }
+                eventsByCategory[e.Category].Add(e);
+                uniqueCategories.Add(e.Category);
+            }
+
+            foreach (var e in uniqueCategories)
+            {
+                Categories.Add(e);
+            }
 
             ////Adds dates to dicionary
             //foreach (var e in _eventsQueue)
