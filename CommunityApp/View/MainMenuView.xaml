@@ -15,6 +15,11 @@
     </UserControl.Resources>
     
     <Grid>
+        <Border Background="#282D33"
+        BorderBrush="#3A4149"
+        BorderThickness="5"
+        CornerRadius="8,8,0,8"/>
+        
         <Button x:Name="btnReportIssues" 
          Content="Report Issues" 
          Command="{Binding ReportCommand}"

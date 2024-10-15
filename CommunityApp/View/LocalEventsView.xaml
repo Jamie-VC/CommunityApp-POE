@@ -6,12 +6,25 @@
              xmlns:local="clr-namespace:CommunityApp.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/ButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
+        <Border Background="#282D33"
+        BorderBrush="#3A4149"
+        BorderThickness="5"
+        CornerRadius="8,8,0,8"/>
+        
         <TextBlock x:Name="textBlock" 
                    HorizontalAlignment="Left" 
                    Margin="29,25,0,0" 
                    TextWrapping="Wrap"
                    Text="Local Events and Announcements" 
+                   Foreground="White"
                    FontSize="24"
                    FontStyle="Oblique"
                    VerticalAlignment="Top"/>
@@ -20,20 +33,23 @@
                  Margin="29,83,0,0" 
                  TextWrapping="Wrap" 
                  Text="Category" 
+                   Foreground="White"
                  FontSize="18"
                  VerticalAlignment="Top"
                  Width="117"/>
         <ListView 
            Margin="29,163,10,100" 
            ItemsSource="{Binding Events}" 
-           BorderThickness="1" BorderBrush="#CCCCCC" 
-           Background="#FFFFFF">
+           BorderThickness="1" BorderBrush="#3A4149" 
+           Background="#3A4149">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}" FontSize="14" Margin="5" />
+                                <TextBlock Text="{Binding Name}" 
+                                           FontSize="16" Margin="5" 
+                                           Foreground="White"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -41,7 +57,9 @@
                     <GridViewColumn Header="Category" Width="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Category}" FontSize="14" Margin="5" />
+                                <TextBlock Text="{Binding Category}"
+                                           FontSize="16" Margin="5"
+                                           Foreground="White"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -49,7 +67,9 @@
                     <GridViewColumn Header="Date" Width="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Date}" FontSize="14" Margin="5" />
+                                <TextBlock Text="{Binding Date}" 
+                                           FontSize="16" Margin="5"
+                                           Foreground="white"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -60,11 +80,13 @@
                 Command="{Binding SearchCommand}"
                 Content="Search"
                 FontSize="18"
+                Style="{StaticResource RoundedButtonStyle}"
                 HorizontalAlignment="Left"
                 Margin="309,83,0,0" 
                 VerticalAlignment="Top" Width="154"/>
         <Button x:Name="btnBack"
                 Command="{Binding BackCommand}"
+                Style="{StaticResource RoundedButtonStyle}"
                 Content="Back"
                 FontSize="18"
                 HorizontalAlignment="Left"
@@ -81,6 +103,7 @@
             Margin="29,125,0,0" 
             TextWrapping="Wrap" 
             Text="Date" 
+            Foreground="White"
             FontSize="18"
             VerticalAlignment="Top"
             Width="117"/>
