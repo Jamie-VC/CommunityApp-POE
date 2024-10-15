@@ -7,10 +7,68 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label x:Name="label"
-               Content="Local events"
-               HorizontalAlignment="Left"
-               Margin="228,0,0,0" VerticalAlignment="Center"/>
+        <TextBlock x:Name="textBlock" 
+                   HorizontalAlignment="Left" 
+                   Margin="29,25,0,0" 
+                   TextWrapping="Wrap"
+                   Text="Local Events and Announcements" 
+                   FontSize="24"
+                   FontStyle="Oblique"
+                   VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" 
+                 HorizontalAlignment="Left"
+                 Margin="29,83,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="Search Category" 
+                 FontSize="18"
+                 VerticalAlignment="Top"
+                 Width="239"/>
+        <ListView 
+           Margin="29,135,10,128" 
+           ItemsSource="{Binding Events}" 
+           BorderThickness="1" BorderBrush="#CCCCCC" 
+           Background="#FFFFFF">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" FontSize="14" Margin="5" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
+                    <GridViewColumn Header="Category" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Category}" FontSize="14" Margin="5" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Date" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Date}" FontSize="14" Margin="5" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="btnSearch"
+                Command="{Binding SearchCommand}"
+                Content="Search"
+                FontSize="18"
+                HorizontalAlignment="Left"
+                Margin="309,83,0,0" 
+                VerticalAlignment="Top" Width="154"/>
+        <Button x:Name="btnBack"
+                Command="{Binding BackCommand}"
+                Content="Back"
+                FontSize="18"
+                HorizontalAlignment="Left"
+                Margin="29,340,0,0" 
+                VerticalAlignment="Top" Width="154"/>
     </Grid>
 </UserControl>
