@@ -24,7 +24,7 @@
                  VerticalAlignment="Top"
                  Width="117"/>
         <ListView 
-           Margin="29,135,10,128" 
+           Margin="29,163,10,100" 
            ItemsSource="{Binding Events}" 
            BorderThickness="1" BorderBrush="#CCCCCC" 
            Background="#FFFFFF">
@@ -68,7 +68,7 @@
                 Content="Back"
                 FontSize="18"
                 HorizontalAlignment="Left"
-                Margin="29,340,0,0" 
+                Margin="29,368,0,0" 
                 VerticalAlignment="Top" Width="154"/>
         <ComboBox x:Name="cmbCategory"
                   ItemsSource="{Binding Categories}"
@@ -76,5 +76,19 @@
                   HorizontalAlignment="Left" 
                   Margin="146,86,0,0"
                   VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="textBox_Copy" 
+            HorizontalAlignment="Left"
+            Margin="29,125,0,0" 
+            TextWrapping="Wrap" 
+            Text="Date" 
+            FontSize="18"
+            VerticalAlignment="Top"
+            Width="117"/>
+        <TextBox x:Name="textBox1" 
+                 HorizontalAlignment="Left"
+                 Margin="146,125,0,0"
+                 TextWrapping="Wrap" 
+                 Text="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}" 
+                 VerticalAlignment="Top" Width="120"/>
     </Grid>
 </UserControl>

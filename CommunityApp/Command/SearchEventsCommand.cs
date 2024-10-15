@@ -27,21 +27,40 @@ namespace CommunityApp.Command
         {
            _localEventsViewModel.Events.Clear();
             //_localEventsViewModel.LoadSampleData();
-            if (_localEventsViewModel.SelectedCategory ==null)
+            if (_localEventsViewModel.SelectedCategory ==null && _localEventsViewModel.SelectedDate == null)
             {
                 foreach (var e in _events)
                 {
                     _localEventsViewModel.Events.Add(e);
                 }
             }
-            else
+            else if (_localEventsViewModel.SelectedDate ==null)
             {
                 var filter = _events.Where(e => e.Category == _localEventsViewModel.SelectedCategory).ToList();
 
                 foreach (var e in filter)
                 {
                     _localEventsViewModel.Events.Add(e);
-                }            
+                }
+            }
+            else if(_localEventsViewModel.SelectedCategory == null)
+            {
+                var filter = _events.Where(e => e.Date == DateOnly.Parse(_localEventsViewModel.SelectedDate)).ToList();
+
+                foreach (var e in filter)
+                {
+                    _localEventsViewModel.Events.Add(e);
+                }
+            }
+            else if (_localEventsViewModel.SelectedCategory != null && _localEventsViewModel.SelectedDate != null)
+            {
+                var filter = _events.Where(e => e.Category == _localEventsViewModel.SelectedCategory
+                && e.Date == DateOnly.Parse(_localEventsViewModel.SelectedDate)).ToList();
+
+                foreach(var e in filter)
+                {
+                    _localEventsViewModel.Events.Add(e);
+                }
             }
         }
     }

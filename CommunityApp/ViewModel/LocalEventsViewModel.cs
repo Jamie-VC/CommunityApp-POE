@@ -16,9 +16,11 @@ namespace CommunityApp.ViewModel
         private readonly NavigationStore _navigationStore;
         private readonly User _user;
 
-        //Data structures
         public ObservableCollection<Event> Events { get; set; }  //set the contents of this in the searchCommand
         public ObservableCollection<string> Categories { get; set; }
+        public ObservableCollection<DateOnly> Dates { get; set; }
+
+        //Data structures
         private Queue<Event> _eventsQueue;
         private SortedDictionary<string, List<Event>> eventsByCategory;
         private SortedDictionary<DateOnly, List<Event>> eventsByDate;
@@ -35,6 +37,16 @@ namespace CommunityApp.ViewModel
                 OnPropertyChanged(nameof(SelectedCategory));
             }
         }
+        private string _selectedDate;
+        public string SelectedDate
+        {
+            get => _selectedDate;
+            set
+            {
+                _selectedDate = value;
+                OnPropertyChanged(nameof(SelectedDate));
+            }
+        }
 
         //Commands
         public ICommand BackCommand { get; }
@@ -47,8 +59,10 @@ namespace CommunityApp.ViewModel
 
             Events = new ObservableCollection<Event>();
             Categories = new ObservableCollection<string>();
+
             _eventsQueue = new Queue<Event>();
             eventsByCategory = new SortedDictionary<string, List<Event>>();
+            eventsByDate = new SortedDictionary<DateOnly, List<Event>>();
             uniqueCategories = new HashSet<string>();
 
             BackCommand = new NavigateMenuCommand(user, navigationStore);
@@ -89,16 +103,15 @@ namespace CommunityApp.ViewModel
                 Categories.Add(e);
             }
 
-            ////Adds dates to dicionary
-            //foreach (var e in _eventsQueue)
-            //{
-            //    if (!eventsByDate.ContainsKey(e.Date))
-            //    {
-            //        eventsByDate[e.Date] = new List<Event>();
-            //    }
-            //    eventsByDate[e.Date].Add(e);
-            //}
-
+            //Adds dates to dicionary
+            foreach (var e in _eventsQueue)
+            {
+                if (!eventsByDate.ContainsKey(e.Date))
+                {
+                    eventsByDate[e.Date] = new List<Event>();
+                }
+                eventsByDate[e.Date].Add(e);
+            }
         }
     }
 }
