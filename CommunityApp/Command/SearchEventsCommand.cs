@@ -47,7 +47,7 @@ namespace CommunityApp.Command
             }
             else if(_localEventsViewModel.SelectedCategory == null)
             {
-                var filter = _events.Where(e => e.Date == DateOnly.Parse(_localEventsViewModel.SelectedDate)).ToList();
+                var filter = _events.Where(e => e.Date == DateOnly.FromDateTime(DateTime.Parse(_localEventsViewModel.SelectedDate))).ToList();
 
                 foreach (var e in filter)
                 {
@@ -57,7 +57,7 @@ namespace CommunityApp.Command
             else if (_localEventsViewModel.SelectedCategory != null && _localEventsViewModel.SelectedDate != null)
             {
                 var filter = _events.Where(e => e.Category == _localEventsViewModel.SelectedCategory
-                && e.Date == DateOnly.Parse(_localEventsViewModel.SelectedDate)).ToList();
+                && e.Date == DateOnly.FromDateTime(DateTime.Parse((_localEventsViewModel.SelectedDate)))).ToList();
 
                 foreach(var e in filter)
                 {

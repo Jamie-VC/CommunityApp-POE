@@ -128,12 +128,13 @@
             FontSize="18"
             VerticalAlignment="Top"
             Width="117"/>
-        <TextBox x:Name="textBox1" 
-                 HorizontalAlignment="Left"
-                 Margin="146,134,0,0"
-                 TextWrapping="Wrap" 
-                 Text="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}" 
-                 VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="datePicker1"
+            HorizontalAlignment="Left"
+            Margin="146,134,0,0"
+            SelectedDate="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Top" 
+            Width="120"/>
+
         <TextBlock x:Name="textBox_Copy1" 
             HorizontalAlignment="Left"
             Margin="29,125,0,0" 
