@@ -64,6 +64,8 @@ namespace CommunityApp.Command
                     _localEventsViewModel.Events.Add(e);
                 }
             }
+            _localEventsViewModel.SelectedCategory = null;
+            _localEventsViewModel.SelectedDate = null;
         }
     }
 }

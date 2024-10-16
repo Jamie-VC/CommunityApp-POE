@@ -56,7 +56,8 @@ namespace CommunityApp.Command
             foreach (var i in p)
             {
                 _localEventsViewModel.Events.Add(i);
-            }   
+            }
+            _localEventsViewModel.SearchItem = null;        //take note
         }
     }
 }
