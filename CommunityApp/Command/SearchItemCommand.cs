@@ -36,7 +36,7 @@ namespace CommunityApp.Command
 
                 foreach (var item in _queue)
                 {
-                    if (item.Name.Equals(_localEventsViewModel.SearchItem)
+                    if (item.Name.Equals(_localEventsViewModel.SearchItem, StringComparison.OrdinalIgnoreCase)
                         && _user.Interests.Contains(item.Category))
                     {
                         recCat.Add(item.Category);
@@ -52,7 +52,7 @@ namespace CommunityApp.Command
 
             _localEventsViewModel.Events.Clear();
 
-            var p = _queue.Where(e => e.Name.Equals(_localEventsViewModel.SearchItem)).ToList();
+            var p = _queue.Where(e => e.Name.Equals(_localEventsViewModel.SearchItem, StringComparison.OrdinalIgnoreCase)).ToList();
             foreach (var i in p)
             {
                 _localEventsViewModel.Events.Add(i);
