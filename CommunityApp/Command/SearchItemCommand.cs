@@ -33,15 +33,16 @@ namespace CommunityApp.Command
         public override void Execute(object? parameter)
         {
             searches.Add(_localEventsViewModel.SearchItem);
+            var searchWords = _localEventsViewModel.SearchItem.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-                foreach (var item in _queue)
+            foreach (var item in _queue)
                 {
-                    if (item.Name.Equals(_localEventsViewModel.SearchItem, StringComparison.OrdinalIgnoreCase)
-                        && _user.Interests.Contains(item.Category))
-                    {
-                        recCat.Add(item.Category);
-                    }
+                if (searchWords.Any(word => item.Name.IndexOf(word, StringComparison.OrdinalIgnoreCase) >= 0)
+                    && _user.Interests.Contains(item.Category))
+                {
+                    recCat.Add(item.Category);
                 }
+            }
                 foreach (var item in _queue)
                 {
                     if(recCat.Contains(item.Category))
@@ -52,7 +53,9 @@ namespace CommunityApp.Command
 
             _localEventsViewModel.Events.Clear();
 
-            var p = _queue.Where(e => e.Name.Equals(_localEventsViewModel.SearchItem, StringComparison.OrdinalIgnoreCase)).ToList();
+            var p = _queue.Where(e => searchWords.Any(word => e.Name.IndexOf(word, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
+
+            //var p = _queue.Where(e => e.Name.Equals(_localEventsViewModel.SearchItem, StringComparison.OrdinalIgnoreCase)).ToList();
             foreach (var i in p)
             {
                 _localEventsViewModel.Events.Add(i);
