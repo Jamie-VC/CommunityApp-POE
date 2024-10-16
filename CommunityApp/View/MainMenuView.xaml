@@ -19,28 +19,38 @@
         BorderBrush="#3A4149"
         BorderThickness="5"
         CornerRadius="8,8,0,8"/>
-        
-        <Button x:Name="btnReportIssues" 
-         Content="Report Issues" 
-         Command="{Binding ReportCommand}"
-         Style="{StaticResource RoundedButtonStyle}"
-         HorizontalAlignment="Center"
-         Margin="0,117,0,0" 
-         VerticalAlignment="Top" Width="226" Height="30"/>
-        <Button x:Name="btnEventsAndAnnouncements" 
-         Style="{StaticResource RoundedButtonStyle}"
-         Command="{Binding LocalEventsCommand}"
-         Content="Local Events and Announcements" 
-         IsEnabled="True"
-         HorizontalAlignment="Center" 
-         Margin="0,171,0,0" 
-         VerticalAlignment="Top" Height="30" Width="228"/>
-        <Button x:Name="btnServiceRequestStatus" 
-         Style="{StaticResource RoundedButtonStyle}"
-         IsEnabled="False"
-         Content="Service Request Status"
-         HorizontalAlignment="Center"
-         VerticalAlignment="Top" Width="226" Height="30" Margin="0,225,0,0"/>
 
+        <Border BorderBrush="#3A4149"
+            BorderThickness="2"
+            CornerRadius="8"
+            Padding="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button x:Name="btnReportIssues" 
+                    Content="Report Issues" 
+                    Command="{Binding ReportCommand}"
+                    Style="{StaticResource RoundedButtonStyle}"
+                    Width="226" 
+                    Height="30" 
+                    Margin="0,5,0,5"/>
+
+                <Button x:Name="btnEventsAndAnnouncements" 
+                    Style="{StaticResource RoundedButtonStyle}"
+                    Command="{Binding LocalEventsCommand}"
+                    Content="Local Events and Announcements"
+                    Width="228" 
+                    Height="30" 
+                    Margin="0,5,0,5"/>
+
+                <Button x:Name="btnServiceRequestStatus" 
+                    Style="{StaticResource RoundedButtonStyle}"
+                    IsEnabled="False"
+                    Content="Service Request Status"
+                    Width="226" 
+                    Height="30" 
+                    Margin="0,5,0,5"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
