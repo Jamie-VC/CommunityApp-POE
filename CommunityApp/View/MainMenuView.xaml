@@ -45,7 +45,7 @@
 
                 <Button x:Name="btnServiceRequestStatus" 
                     Style="{StaticResource RoundedButtonStyle}"
-                    IsEnabled="False"
+                    Command="{Binding ServiceRequestCommand}"
                     Content="Service Request Status"
                     Width="226" 
                     Height="30" 

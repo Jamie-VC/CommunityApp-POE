@@ -22,6 +22,9 @@
             <DataTemplate DataType="{x:Type vms:LocalEventsViewModel}">
                 <view:LocalEventsView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:ServiceRequestViewModel}">
+                <view:ServiceRequestView/>
+            </DataTemplate>
         </Grid.Resources>
 
         <ContentControl Content="{Binding CurrentViewModel}"/>

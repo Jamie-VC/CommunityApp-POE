@@ -16,11 +16,13 @@ namespace CommunityApp.ViewModel
         private readonly User _user;
         public ICommand ReportCommand { get; }
         public ICommand LocalEventsCommand { get; }
+        public ICommand ServiceRequestCommand { get; }
         public MainMenuViewModel(User user, NavigationStore navigationStore)
         {
             _user = user;
             ReportCommand = new NavigateIssueListCommand(_user, navigationStore);
             LocalEventsCommand = new NavigateLocalEventsCommand(_user, navigationStore);
+            ServiceRequestCommand = new NavigateServiceRequestCommand(navigationStore);
         }
     }
 }
