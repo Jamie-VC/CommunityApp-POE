@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using CommunityApp.Model;
 using CommunityApp.Stores;
 using CommunityApp.ViewModel;
+using CommunityApp.Model;
 
 namespace CommunityApp.Command
 {
     public class NavigateServiceRequestCommand: CommandBase
     {
         private readonly NavigationStore _navigationStore;
-        //private readonly User _user;
+        private readonly User _user;
         public NavigateServiceRequestCommand(NavigationStore navigationStore) 
         {
             _navigationStore = navigationStore;
@@ -20,7 +21,7 @@ namespace CommunityApp.Command
 
         public override void Execute(object? parameter)
         {
-            _navigationStore.CurrentViewModel = new ServiceRequestViewModel(_navigationStore);
+            _navigationStore.CurrentViewModel = new ServiceRequestViewModel(_user, _navigationStore);
         }
     }
 }

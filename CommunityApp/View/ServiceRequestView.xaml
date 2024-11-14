@@ -35,31 +35,51 @@
             <!-- Filter Bar -->
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBox x:Name="SearchBox" Width="150" Margin="5"/>
-                <ComboBox x:Name="PriorityFilter" Width="100" Margin="5">
+                <!--<ComboBox x:Name="PriorityFilter" Width="100" Margin="5">
                     <ComboBoxItem Content="All"/>
                     <ComboBoxItem Content="High"/>
                     <ComboBoxItem Content="Medium"/>
                     <ComboBoxItem Content="Low"/>
-                </ComboBox>
-                <ComboBox x:Name="StatusFilter" Width="100" Margin="5">
-                    <ComboBoxItem Content="All"/>
-                    <ComboBoxItem Content="Pending"/>
-                    <ComboBoxItem Content="In Progress"/>
-                    <ComboBoxItem Content="Completed"/>
-                </ComboBox>
-                <Button Content="Filter" Width="75" Margin="5"/>
+                </ComboBox>-->
+                <ComboBox x:Name="StatusFilter" 
+                          Width="100" Margin="5"
+                          ItemsSource="{Binding Statuses}"
+                          SelectedItem="{Binding SelectedStatus}"/>
+
+                <Button Content="Filter"
+                        Width="75" Margin="5" 
+                        Command="{Binding SearchRequestsCommmand}"/>
             </StackPanel>
 
             <!-- DataGrid -->
-            <DataGrid x:Name="ServiceRequestDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Width="50"/>
-                    <DataGridTextColumn Header="Description" Width="200"/>
-                    <DataGridTextColumn Header="Priority" Width="100"/>
-                    <DataGridTextColumn Header="Status" Width="100"/>
-                    <DataGridTextColumn Header="Date" Width="100"/>
-                </DataGrid.Columns>
-            </DataGrid>
+            <ListView 
+            ItemsSource="{Binding ServiceRequests}" 
+            SelectedItem="{Binding SelectedRequest}"
+            BorderThickness="1" BorderBrush="#3A4149" 
+            Background="#3A4149">
+                
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="120">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ID}" 
+                                      FontSize="16" Margin="5" 
+                                      Foreground="White"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Change Status"
+                                  Command="{Binding ChangeStatusCommand}" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                
+            </ListView>
         </StackPanel>
 
         <!-- Right Panel - Detailed View -->
