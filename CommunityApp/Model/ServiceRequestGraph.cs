@@ -8,44 +8,56 @@ namespace CommunityApp.Model
 {
     public class ServiceRequestGraph
     {
-        private Dictionary<string, GraphNode> nodes;
+        public Dictionary<int, List<int>> dependencies;
+        public BinarySearchTree bst;
 
-        public ServiceRequestGraph()
+        public ServiceRequestGraph(BinarySearchTree bst)
         {
-            nodes = new Dictionary<string, GraphNode>
+            dependencies = new Dictionary<int, List<int>>();
+            this.bst = bst;
+        }
+
+        // Add a new request to the graph and BST
+        public void AddRequest(ServiceRequest request)
+        {
+            bst.Insert(request);
+            dependencies[request.ID] = new List<int>();
+        }
+
+        // Add a dependency: fromRequestId must be completed before toRequestId
+        public void AddDependency(int fromRequestId, int toRequestId)
+        {
+            if (dependencies.ContainsKey(fromRequestId))
             {
-                { "Pending", new GraphNode("Pending") },
-                { "Ongoing", new GraphNode("Ongoing") },
-                { "Done", new GraphNode("Done") }
-             };
-
-            // Define transitions (directed edges) between statuses
-            nodes["Pending"].Neighbors.Add(nodes["Ongoing"]);
-            nodes["Ongoing"].Neighbors.Add(nodes["Done"]);
+                dependencies[fromRequestId].Add(toRequestId);
+            }
         }
 
-        public GraphNode GetNode(string status)
+        // Update status of a request in the graph and BST
+        public bool UpdateRequestStatus(int requestId, string newStatus)
         {
-            return nodes.ContainsKey(status) ? nodes[status] : null;
+            var request = bst.Search(requestId);
+            if (request != null)
+            {
+                request.UpdateStatus(newStatus);
+                return true;
+            }
+            return false;
         }
 
-        //public void RemoveRequest(string status, ServiceRequest request)
-        //{
-        //    var node = GetNode(status);
-        //    node.RemoveRequest(request);
-        //}
-
-        //public void MoveRequest(string requestId, string oldStatus, string newStatus)
-        //{
-        //    var oldNode = GetNode(oldStatus);
-        //    var newNode = GetNode(newStatus);
-
-        //    var request = oldNode.GetRequestById(requestId);
-        //    if (request != null)
-        //    {
-        //        oldNode.RemoveRequest(request);
-        //        newNode.AddRequest(request);
-        //    }
-        //}
+        // Display all requests and their dependencies
+        public void DisplayDependencies()
+        {
+            foreach (var entry in dependencies)
+            {
+                var request = bst.Search(entry.Key);
+                Console.WriteLine($"Request ID: {request.ID}, Status: {request.Status}");
+                foreach (var dep in entry.Value)
+                {
+                    var depRequest = bst.Search(dep);
+                    Console.WriteLine($"  -> Depends on: Request ID {depRequest.ID}, Status: {depRequest.Status}");
+                }
+            }
+        }
     }
 }

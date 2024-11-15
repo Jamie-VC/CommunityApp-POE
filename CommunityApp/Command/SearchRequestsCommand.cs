@@ -19,7 +19,7 @@ namespace CommunityApp.Command
 
         
 
-        private readonly ObservableCollection<ServiceRequest> _serviceRequests;
+        //private readonly ObservableCollection<ServiceRequest> _serviceRequests;
         public SearchRequestsCommand(ServiceRequestViewModel srVM, User user, NavigationStore navigationStore, ServiceRequestGraph graph)
         {
             _serviceRequestViewModel = srVM;
@@ -31,7 +31,26 @@ namespace CommunityApp.Command
         public override void Execute(object? parameter)
         {
             _serviceRequestViewModel.ServiceRequests.Clear();
-            _serviceRequestViewModel.DisplayServiceRequests(_serviceRequestViewModel.SelectedStatus);
+            
+            if(_serviceRequestViewModel.SelectedStatus != null)
+            {
+                foreach (var request in _serviceRequestViewModel.GetAllRequests())
+                {
+                    if (request.Status.Equals(_serviceRequestViewModel.SelectedStatus))
+                    {
+                        _serviceRequestViewModel.ServiceRequests.Add(request);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var request in _serviceRequestViewModel.GetAllRequests())
+                {
+                    _serviceRequestViewModel.ServiceRequests.Add(request);
+                }
+            }
+
+            _serviceRequestViewModel.SelectedRequest = null;
         }
     }
 }

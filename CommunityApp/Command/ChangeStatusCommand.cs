@@ -14,23 +14,14 @@ namespace CommunityApp.Command
     {
         private readonly ServiceRequestViewModel _vm;
         private readonly ServiceRequestGraph _graph;
-        public ChangeStatusCommand(ServiceRequestViewModel vm, ServiceRequestGraph graph)
+        public ChangeStatusCommand(ServiceRequestViewModel vm)
         {
             _vm = vm;
-            _graph = graph;
+            //_graph = graph;
         }
         public override void Execute(object? parameter)
         {
-            if (_vm.SelectedRequest != null)
-            {
-                var newStatus = PromptForNewStatus();
-                if (newStatus != null)
-                {
-                    _vm.SelectedRequest.Status = newStatus;
-                    _graph.GetNode(newStatus).AddRequest(_vm.SelectedRequest);
-                    //_graph.MoveRequest(_vm.SelectedRequest.ID, _vm.SelectedRequest.Status, newStatus);
-                }
-            }
+            PromptForNewStatus();
         }
 
         public string PromptForNewStatus()
@@ -44,7 +35,8 @@ namespace CommunityApp.Command
                 if (!string.IsNullOrEmpty(newStatus))
                 {
                     // Update the selected request's status
-                    _vm.SelectedRequest.Status = newStatus;
+                    //_vm.SelectedRequest.Status = newStatus;
+                    _vm.UpdateStatus(newStatus);
                 }
                 return newStatus;
             }

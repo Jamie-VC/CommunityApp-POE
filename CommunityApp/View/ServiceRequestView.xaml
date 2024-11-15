@@ -44,7 +44,7 @@
                 <ComboBox x:Name="StatusFilter" 
                           Width="100" Margin="5"
                           ItemsSource="{Binding Statuses}"
-                          SelectedItem="{Binding SelectedStatus}"/>
+                          SelectedItem="{Binding SelectedStatus, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Button Content="Filter"
                         Width="75" Margin="5" 

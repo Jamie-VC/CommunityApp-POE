@@ -18,11 +18,12 @@ namespace CommunityApp.ViewModel
         private readonly NavigationStore _navigationStore;
         private readonly User _user;
 
-        private ServiceRequestGraph serviceRequestGraph;
-       //private ServiceRequestTree serviceRequestTree;
+        BinarySearchTree bst;
+        ServiceRequestGraph graph;
 
         //Collection
         public ObservableCollection<ServiceRequest> ServiceRequests { get; set; }
+        public ObservableCollection<string> Dependencies { get; set; }
         public ObservableCollection<string> Statuses { get; set; }
 
         //Properties
@@ -55,67 +56,100 @@ namespace CommunityApp.ViewModel
             _user = user;
             _navigationStore = navigationStore;
 
+            bst = new BinarySearchTree();
+            graph = new ServiceRequestGraph(bst);
+
+
+            ServiceRequests = new ObservableCollection<ServiceRequest>();
+            Dependencies = new ObservableCollection<string>();  
             Statuses = new ObservableCollection<string>
             {
                 new string ("Pending"),
                 new string ("Ongoing"),
                 new string ("Done")
             };
-
             Initialize();
 
-            ServiceRequests = new ObservableCollection<ServiceRequest>();
+            SearchRequestsCommmand = new SearchRequestsCommand(this, user, navigationStore, graph);
+            ChangeStatusCommand = new ChangeStatusCommand(this);
+        }
+        public void Initialize()
+        {
+            // Add some sample service requests
+            var request1 = new ServiceRequest(1, "Pending", DateTime.Now.AddDays(-5), "Install new internet connection");
+            var request2 = new ServiceRequest(2, "Pending", DateTime.Now.AddDays(-3), "Repair street light");
+            var request3 = new ServiceRequest(3, "Pending", DateTime.Now.AddDays(-1), "Fix water leakage");
 
-            SearchRequestsCommmand = new SearchRequestsCommand(this, user, navigationStore, serviceRequestGraph);
-            ChangeStatusCommand = new ChangeStatusCommand(this, serviceRequestGraph);
+            //var request4 = new ServiceRequest(1, "Ongoing", DateTime.Now.AddDays(-5), "Install new internet connection");
+            //var request5 = new ServiceRequest(2, "Ongoing", DateTime.Now.AddDays(-3), "Repair street light");
+            //var request6 = new ServiceRequest(3, "Ongoing", DateTime.Now.AddDays(-1), "Fix water leakage");
+            //var request7 = new ServiceRequest(1, "Ongoing", DateTime.Now.AddDays(-5), "Install new internet connection");
+            //var request8 = new ServiceRequest(2, "Ongoing", DateTime.Now.AddDays(-3), "Repair street light");
+            //var request9 = new ServiceRequest(3, "Done", DateTime.Now.AddDays(-1), "Fix water leakage");
+            //var request10 = new ServiceRequest(1, "Done", DateTime.Now.AddDays(-5), "Install new internet connection");
+            //var request11 = new ServiceRequest(2, "Done", DateTime.Now.AddDays(-3), "Repair street light");
+            //var request12 = new ServiceRequest(3, "Done", DateTime.Now.AddDays(-1), "Fix water leakage");
+
+            graph.AddRequest(request1);
+            graph.AddRequest(request2);
+            graph.AddRequest(request3);
+
+            // Set dependencies (request 2 depends on 1, and request 3 depends on 2)
+            graph.AddDependency(1, 2);
+            graph.AddDependency(2, 3);
+
+            // Populate the ObservableCollection
+
+            //foreach (var request in GetAllRequests())
+            //{
+            //    ServiceRequests.Add(request);
+            //}
+        }
+        // Retrieve all service requests (in-order traversal)
+        public ObservableCollection<ServiceRequest> GetAllRequests()
+        {
+            var list = new ObservableCollection<ServiceRequest>();
+            bst.InOrderTraversal(bst.GetRoot(), (request) => list.Add(request));
+            return list;
         }
 
-        private void Initialize()
+        // Update a service request's status
+        public void UpdateStatus(int requestId, string newStatus)
         {
-            serviceRequestGraph = new ServiceRequestGraph();
-
-            // Add mock data for graph
-            var request1 = new ServiceRequest { ID = "SR001", Description = "Fix printer", Status = "Pending", Date = DateTime.Now.AddDays(-5) };
-            var request2 = new ServiceRequest { ID = "SR002", Description = "Setup PC", Status = "Ongoing", Date = DateTime.Now.AddDays(-2) };
-            var request3 = new ServiceRequest { ID = "SR003", Description = "Update payroll", Status = "Done", Date = DateTime.Now };
-
-            serviceRequestGraph.GetNode("Pending").AddRequest(request1);
-            serviceRequestGraph.GetNode("Ongoing").AddRequest(request2);
-            serviceRequestGraph.GetNode("Done").AddRequest(request3);
-
-            // Data for tree
-            //serviceRequestTree = new ServiceRequestTree();
-            //serviceRequestTree.
-        }
-
-        public void DisplayServiceRequests(string status)
-        {
-            var node = serviceRequestGraph.GetNode(status);
-            if (node != null)
+            if (graph.UpdateRequestStatus(requestId, newStatus))
             {
-                node.RequestsTree.GetAllRequests().ForEach(request =>
+                var request = ServiceRequests.FirstOrDefault(r => r.ID == requestId);
+                if (request != null)
                 {
-                    ServiceRequests.Add(request);
-                });
-
-                //foreach (var serviceRequest in node.GetAllRequests())
-                //{
-                //    ServiceRequests.Add(serviceRequest);
-                //}
+                    request.Status = newStatus;
+                }
             }
         }
 
-        //public void move()
-        //{
-        //    var requestId = RequestIdBox.Text;
-        //    var fromStatus = (FromStatusComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
-        //    var toStatus = (ToStatusComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
-
-        //    if (!string.IsNullOrEmpty(requestId) && !string.IsNullOrEmpty(fromStatus) && !string.IsNullOrEmpty(toStatus))
-        //    {
-        //        serviceRequestGraph.MoveRequest(requestId, fromStatus, toStatus);
-        //        MessageBox.Show($"Request {requestId} moved from {fromStatus} to {toStatus}.");
-        //    }
-        //}
+        // Display dependencies for a selected request
+        public void ShowDependencies(int requestId)
+        {
+            Dependencies.Clear();
+            if (graph.dependencies.TryGetValue(requestId, out var dependentIds))
+            {
+                foreach (var id in dependentIds)
+                {
+                    var depRequest = bst.Search(id);
+                    if (depRequest != null)
+                    {
+                        Dependencies.Add($"Depends on Request ID: {depRequest.ID} - {depRequest.Description} (Status: {depRequest.Status})");
+                    }
+                }
+            }
+        }
+        public void UpdateStatus(string newStatus)
+        {
+            if (SelectedRequest != null)
+            {
+                SelectedRequest.Status = newStatus;
+                graph.UpdateRequestStatus(SelectedRequest.ID, newStatus);
+                //OnPropertyChanged(nameof(ServiceRequests)); // Notify UI of change
+            }
+        }
     }
 }
