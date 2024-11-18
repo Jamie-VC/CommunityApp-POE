@@ -6,7 +6,14 @@
              xmlns:local="clr-namespace:CommunityApp.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/ButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="#282D33">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <!-- TreeView Panel -->
@@ -21,6 +28,7 @@
                 Content="Back"
                 Height="30"
                 VerticalAlignment="Top"
+                Style="{StaticResource RoundedButtonStyle}"
                 Command="{Binding BackCommand}"/>
 
         <!-- Main Panel - Filter Bar and DataGrid -->
@@ -40,7 +48,8 @@
 
                 <Button Content="Filter"
                         Width="75" Margin="5" 
-                        Command="{Binding SearchRequestsCommmand}"/>
+                        Command="{Binding SearchRequestsCommmand}"
+                         Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
 
             <!-- DataGrid -->
