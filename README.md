@@ -1,6 +1,6 @@
 # CommunityApp
 
-**CommunityApp** is a WPF application using .NET 8, designed as a municipal community application. This version focuses on reporting and viewing issues, with two other core functionalities to be implemented in future updates. Currently, users can report issues and view them within the app.
+**CommunityApp** is a WPF application using .NET 8, designed as a municipal community application. Users can use this application to view and report issues to/from the community, search for events/ announcements that are taking place and track service requests.
 
 ## Functionality
 
