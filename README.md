@@ -3,7 +3,7 @@ This is a WPF applicattion using .net 8 designed as a municpal community applica
 as of right now, this is only part of the application as there are two other core functionalities to be implemented.
 this version will allow user to report issues and view them.
 
-##Functionalitiy
+## Functionalitiy
 - On startup, the user can select report issues task or Local Events and Announcements
 - upon selecting the report issues task, the user will be promted for details about the issue
     -Location
@@ -19,7 +19,10 @@ this version will allow user to report issues and view them.
   - search by name
 - based on the  users hardcoded interests and the users search history - a recommendations view will be displayed
 
-##Installation
+## Installation
 1. **clone this repository**
 2. Open the solution
 3. Run the project
+
+
+
