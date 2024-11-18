@@ -4,7 +4,7 @@ as of right now, this is only part of the application as there are two other cor
 this version will allow user to report issues and view them.
 
 ## Functionalitiy
-- On startup, the user can select report issues task or Local Events and Announcements
+- On startup, the user can select report issues task, Local Events and Announcements or Service requests
 - upon selecting the report issues task, the user will be promted for details about the issue
     -Location
     -Category
@@ -18,6 +18,14 @@ this version will allow user to report issues and view them.
   - filter by both category and date
   - search by name
 - based on the  users hardcoded interests and the users search history - a recommendations view will be displayed
+-  Upon selecting Service requests, the user will be can click on the search button for all stored service requests to be shown
+-  the user can also click on the combo box to select a status (pending, ongoing or done) and then the search button again for the service requests with the selected status to be displayed
+-  While there are service requests displayed on the screen, the user can change the status of the selected request
+  - right click on the desired service request
+  - click on update status
+  - choose the appropriate status from the combo box
+  - click ok
+- when the user searches for service requests again, the updatee request will be displayed accordinly
 
 ## Installation
 1. **clone this repository**
