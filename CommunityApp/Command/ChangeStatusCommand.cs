@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using CommunityApp.Model;
 using CommunityApp.ViewModel;
+using CommunityApp.Stores;
 
 
 namespace CommunityApp.Command
@@ -14,6 +15,9 @@ namespace CommunityApp.Command
     {
         private readonly ServiceRequestViewModel _vm;
         private readonly ServiceRequestGraph _graph;
+
+        private readonly User _user;
+        private readonly NavigationStore _navigationStore;
         public ChangeStatusCommand(ServiceRequestViewModel vm)
         {
             _vm = vm;
@@ -34,8 +38,6 @@ namespace CommunityApp.Command
                 string newStatus = dialog.NewStatus;
                 if (!string.IsNullOrEmpty(newStatus))
                 {
-                    // Update the selected request's status
-                    //_vm.SelectedRequest.Status = newStatus;
                     _vm.UpdateStatus(newStatus);
                 }
                 return newStatus;

@@ -14,8 +14,9 @@ namespace CommunityApp.Command
     {
         private readonly NavigationStore _navigationStore;
         private readonly User _user;
-        public NavigateServiceRequestCommand(NavigationStore navigationStore) 
+        public NavigateServiceRequestCommand(User user, NavigationStore navigationStore) 
         {
+            _user = user;
             _navigationStore = navigationStore;
         }
 

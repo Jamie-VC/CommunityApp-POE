@@ -47,6 +47,16 @@ namespace CommunityApp.ViewModel
                 OnPropertyChanged(nameof(SelectedRequest));
             }
         }
+        private string searchId;
+        public string SearchId
+        {
+            get => searchId;
+            set
+            {
+                searchId = value;
+                OnPropertyChanged(nameof(SearchId));
+            }
+        }
 
         //Command
         public ICommand SearchRequestsCommmand { get; set; }
@@ -73,7 +83,7 @@ namespace CommunityApp.ViewModel
 
             SearchRequestsCommmand = new SearchRequestsCommand(this, user, navigationStore, graph);
             ChangeStatusCommand = new ChangeStatusCommand(this);
-            BackCommand = new NavigateMenuCommand(_user, _navigationStore);
+            BackCommand = new NavigateMenuCommand(user, navigationStore);
         }
         public void Initialize()
         {
@@ -82,16 +92,6 @@ namespace CommunityApp.ViewModel
             var request2 = new ServiceRequest(2, "Pending", DateTime.Now.AddDays(-3), "Repair street light");
             var request3 = new ServiceRequest(3, "Pending", DateTime.Now.AddDays(-1), "Fix water leakage");
 
-            //var request4 = new ServiceRequest(1, "Ongoing", DateTime.Now.AddDays(-5), "Install new internet connection");
-            //var request5 = new ServiceRequest(2, "Ongoing", DateTime.Now.AddDays(-3), "Repair street light");
-            //var request6 = new ServiceRequest(3, "Ongoing", DateTime.Now.AddDays(-1), "Fix water leakage");
-            //var request7 = new ServiceRequest(1, "Ongoing", DateTime.Now.AddDays(-5), "Install new internet connection");
-            //var request8 = new ServiceRequest(2, "Ongoing", DateTime.Now.AddDays(-3), "Repair street light");
-            //var request9 = new ServiceRequest(3, "Done", DateTime.Now.AddDays(-1), "Fix water leakage");
-            //var request10 = new ServiceRequest(1, "Done", DateTime.Now.AddDays(-5), "Install new internet connection");
-            //var request11 = new ServiceRequest(2, "Done", DateTime.Now.AddDays(-3), "Repair street light");
-            //var request12 = new ServiceRequest(3, "Done", DateTime.Now.AddDays(-1), "Fix water leakage");
-
             graph.AddRequest(request1);
             graph.AddRequest(request2);
             graph.AddRequest(request3);
@@ -99,13 +99,6 @@ namespace CommunityApp.ViewModel
             // Set dependencies (request 2 depends on 1, and request 3 depends on 2)
             graph.AddDependency(1, 2);
             graph.AddDependency(2, 3);
-
-            // Populate the ObservableCollection
-
-            //foreach (var request in GetAllRequests())
-            //{
-            //    ServiceRequests.Add(request);
-            //}
         }
         // Retrieve all service requests (in-order traversal)
         public ObservableCollection<ServiceRequest> GetAllRequests()

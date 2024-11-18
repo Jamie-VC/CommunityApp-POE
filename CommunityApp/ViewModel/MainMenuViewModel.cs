@@ -22,7 +22,7 @@ namespace CommunityApp.ViewModel
             _user = user;
             ReportCommand = new NavigateIssueListCommand(_user, navigationStore);
             LocalEventsCommand = new NavigateLocalEventsCommand(_user, navigationStore);
-            ServiceRequestCommand = new NavigateServiceRequestCommand(navigationStore);
+            ServiceRequestCommand = new NavigateServiceRequestCommand(_user, navigationStore);
         }
     }
 }
