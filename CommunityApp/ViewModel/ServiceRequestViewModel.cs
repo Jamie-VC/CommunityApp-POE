@@ -51,6 +51,7 @@ namespace CommunityApp.ViewModel
         //Command
         public ICommand SearchRequestsCommmand { get; set; }
         public ICommand ChangeStatusCommand { get; set; }
+        public ICommand BackCommand { get; set; }
         public ServiceRequestViewModel(User user, NavigationStore navigationStore)
         {
             _user = user;
@@ -72,6 +73,7 @@ namespace CommunityApp.ViewModel
 
             SearchRequestsCommmand = new SearchRequestsCommand(this, user, navigationStore, graph);
             ChangeStatusCommand = new ChangeStatusCommand(this);
+            BackCommand = new NavigateMenuCommand(_user, _navigationStore);
         }
         public void Initialize()
         {

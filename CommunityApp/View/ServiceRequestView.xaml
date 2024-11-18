@@ -17,18 +17,11 @@
         </Grid.ColumnDefinitions>
 
         <!-- Left Panel - TreeView -->
-        <TreeView Grid.Column="0" x:Name="CategoryTreeView" Margin="5">
-            <TreeViewItem Header="Departments">
-                <TreeViewItem Header="IT"/>
-                <TreeViewItem Header="HR"/>
-                <TreeViewItem Header="Finance"/>
-            </TreeViewItem>
-            <TreeViewItem Header="Statuses">
-                <TreeViewItem Header="Pending"/>
-                <TreeViewItem Header="In Progress"/>
-                <TreeViewItem Header="Completed"/>
-            </TreeViewItem>
-        </TreeView>
+        <Button x:Name="btnBack"
+                Content="Back"
+                Height="30"
+                VerticalAlignment="Top"
+                Command="{Binding BackCommand}"/>
 
         <!-- Main Panel - Filter Bar and DataGrid -->
         <StackPanel Grid.Column="1" Margin="5">
@@ -83,12 +76,12 @@
         </StackPanel>
 
         <!-- Right Panel - Detailed View -->
-        <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="5">
+        <!--<Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="5">
             <StackPanel>
                 <TextBlock Text="Service Request Details" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
                 <TextBlock x:Name="DetailsTextBlock" Text="Select a service request to view details" TextWrapping="Wrap"/>
-                <!-- Add more detailed properties as needed -->
+                --><!-- Add more detailed properties as needed --><!--
             </StackPanel>
-        </Border>
+        </Border>-->
     </Grid>
 </UserControl>
